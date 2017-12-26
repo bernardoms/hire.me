@@ -20,7 +20,10 @@ e rapida, uma vez que o MockMvc simula requisções GET e POST ao controler.
 
 
 ## Top 10 urls
-Foi feita a consulta das 10 urls mais acessadas utilizando a notação JPA
+Foi feita a consulta das 10 urls mais acessadas utilizando o spring data.
+
+## Diagramas
+Os diagramas foram feitos utilizando a ferramenta https://www.websequencediagrams.com/
 
 ## endpoints presentes no projeto e seus respectivos exemplos:
 
