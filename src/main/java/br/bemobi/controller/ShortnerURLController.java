@@ -22,13 +22,14 @@ import br.bemobi.service.ShortURLService;
 import br.mobi.reponse.ShortURLResponse;
 
 @RestController
+@RequestMapping("/short")
 public class ShortnerURLController{
 
 	@Autowired
 	private ShortURLService service;
 
 	//Requisicao POST para a API, Grava o url passando a URL e o alias desejado, caso alias for nulo é criado um hash.
-	@RequestMapping(method = RequestMethod.POST,value = "/create")
+	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<?> saveURL(@RequestParam (value = "url") String url,@RequestParam(value = "alias",required = false) String alias) throws MalformedURLException
 	{
 		//TODO Remover e incluir uma validacao na pagina
@@ -83,7 +84,7 @@ public class ShortnerURLController{
 		return new ResponseEntity<>(response,HttpStatus.CREATED);
 	}
 	//Requisicao GET para a API, recupera o url passando o alias
-	@RequestMapping(method = RequestMethod.GET,value = "/read")
+	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<?> readURL(@RequestParam String alias) throws Exception
 	{
 		URLShortner urlShort = new URLShortner();

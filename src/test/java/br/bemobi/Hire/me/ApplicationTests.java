@@ -28,7 +28,7 @@ public class ApplicationTests {
 	@Test
 	public void shouldCreateURLWithoutAlias() throws Exception
 	{
-		this.mockMvc.perform(post("/create").param("url", "http://www.bemobi.com.br")).andExpect(status().isCreated())
+		this.mockMvc.perform(post("/short").param("url", "http://www.bemobi.com.br")).andExpect(status().isCreated())
         .andExpect(jsonPath("$.alias").value(service.getCustomName()))
         .andExpect(jsonPath("$.url").value("http://www.bemobi.com.br"));
 	}
@@ -36,7 +36,7 @@ public class ApplicationTests {
 	@Test
 	public void shouldCreateURLWithAlias() throws Exception
 	{
-		this.mockMvc.perform(post("/create").param("url", "http://www.bemobi.com.br").param("alias","bemobi")).andExpect(status().isCreated())
+		this.mockMvc.perform(post("/short").param("url", "http://www.bemobi.com.br").param("alias","bemobi")).andExpect(status().isCreated())
         .andExpect(jsonPath("$.alias").value("bemobi"))
         .andExpect(jsonPath("$.url").value("http://www.bemobi.com.br"));
 	}
@@ -44,7 +44,7 @@ public class ApplicationTests {
 	@Test
 	public void shouldGiveAlreadyUsedAliasError() throws Exception
 	{
-		this.mockMvc.perform(post("/create").param("url", "http://www.bemobi.com.br").param("alias","bemobi")).andExpect(status().isBadRequest())
+		this.mockMvc.perform(post("/short").param("url", "http://www.bemobi.com.br").param("alias","bemobi")).andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.alias").value("bemobi"))
         .andExpect(jsonPath("$.description").value("CUSTOM ALIAS ALREADY EXISTS"))
         .andExpect(jsonPath("$.error_code").value ("001"));
@@ -53,7 +53,7 @@ public class ApplicationTests {
 	@Test
 	public void shouldGiveInvalidURLError() throws Exception
 	{
-		this.mockMvc.perform(post("/create").param("url", "www.bemobi.com.br").param("alias","bemobi2")).andExpect(status().isBadRequest())
+		this.mockMvc.perform(post("/short").param("url", "www.bemobi.com.br").param("alias","bemobi2")).andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.url").value("www.bemobi.com.br"))
         .andExpect(jsonPath("$.description").value("INVALID_URL_FORMAT"))
         .andExpect(jsonPath("$.error_code").value ("003"));
@@ -63,7 +63,7 @@ public class ApplicationTests {
 	@Test
 	public void shouldReadURL() throws Exception
 	{
-		this.mockMvc.perform(get("/read").param("alias","bemobi")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/short").param("alias","bemobi")).andExpect(status().isOk())
         .andExpect(jsonPath("$.originalURL").value("http://www.bemobi.com.br"))
         .andExpect(jsonPath("$.alias").value("bemobi"))
         .andExpect(jsonPath("$.views").value("0")); //Views pois ainda não foi vsitada

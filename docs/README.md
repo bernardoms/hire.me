@@ -30,24 +30,24 @@ Os diagramas foram feitos utilizando a ferramenta https://www.websequencediagram
 Criar url encurtada com um alias
 
 ```sh
-curl -H "Content-Type: application/json" -X POST "http://localhost:8080/create?url=http://bemobi.com.br&alias=bemobi"
+curl -H "Content-Type: application/json" -X POST "http://localhost:8080/short?url=http://bemobi.com.br&alias=bemobi"
 ```
 
 Criar uma url encurtada sem alias(utilizando base62)
 
 ```sh
-curl -H "Content-Type: application/json" -X POST "http://localhost:8080/create?url=http://bemobi.com.br
+curl -H "Content-Type: application/json" -X POST "http://localhost:8080/short?url=http://bemobi.com.br
 ```
 
 Consultar um alias exibindo sua url original:
 
 ```sh
-curl "http://localhost:8080/read?alias=bemobi
+curl "http://localhost:8080/short?alias=bemobi
 ```
 
 Ver os top 10 mais visitados:
 
 ```sh
-curl "http://localhost:8080/topURL"
+curl "http://localhost:8080/short/topURL"
 ```
 
