@@ -14,29 +14,27 @@ import br.bemobi.entity.URLShortner;
 import br.bemobi.service.ShortURLService;
 
 @Controller
+@RequestMapping("/HireMe")
 public class RedirectURLController {
 
-	@Autowired
-	private ShortURLService service;
-	
-	@RequestMapping(method = RequestMethod.GET,value = "/HireMe/{alias}")
-	ResponseEntity<?> redirectURL(@PathVariable("alias") String alias)
-	{	
-		URLShortner url = null;
-		try {
-			url = service.findOriginalURLByShort(alias);
-		} catch (Exception e) {
-			HashMap<String, String> error = new HashMap<>();
-			error.put("error_code", "002");
-			error.put("description", e.getMessage());
-			//Cria a mensagem de error
-			return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
-		}
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", url.getOriginalURL());    	
-		//incrementa o numero de views para aquele site reduzido
-		 service.updateURLView(url); 
-		//Redireciona o usuario para a pagina desejada
-		 return new ResponseEntity<String>(headers,HttpStatus.FOUND);
-	}
+    private ShortURLService shortUrlService;
+
+    @Autowired
+    public RedirectURLController(ShortURLService shortUrlService){
+        this.shortUrlService = shortUrlService;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{alias}")
+    ResponseEntity<?> redirectURL(@PathVariable("alias") String alias) throws Exception {
+
+        URLShortner url = shortUrlService.findOriginalURLByShort(alias);
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.add("Location", url.getOriginalURL());
+
+        shortUrlService.updateURLView(url);
+
+        return new ResponseEntity<String>(headers, HttpStatus.FOUND);
+    }
 }

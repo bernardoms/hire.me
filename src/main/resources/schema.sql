@@ -1,5 +1,5 @@
 DROP TABLE URL IF EXISTS;
-create table url 
+create table URL
 (
    id integer not null,
    originalURL varchar(255) not null,

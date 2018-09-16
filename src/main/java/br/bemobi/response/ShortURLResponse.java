@@ -1,5 +1,7 @@
-package br.mobi.reponse;
+package br.bemobi.response;
 //Cçasse responsavel por montar a resposta da API
+import com.sun.jndi.toolkit.url.Uri;
+
 import java.util.HashMap;
 
 public class ShortURLResponse {

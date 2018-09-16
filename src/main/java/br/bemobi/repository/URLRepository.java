@@ -14,7 +14,6 @@ public interface URLRepository extends JpaRepository<URLShortner, Long> {
 
 	URLShortner findByoriginalURL(String originalURL);
 	URLShortner findByalias(String alias);
-	//Query JPA para encontrar os 10 sites mais acessados
 	List<URLShortner> findTop10ByOrderByViewsDesc();
 
 }
